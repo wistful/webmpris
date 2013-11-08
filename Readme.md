@@ -142,11 +142,15 @@ Response:
 
 Request: `curl -i -H "Accept: application/json" -X GET "http://127.0.0.1:8000/webmpris/players/:1.9904/Root"`
 
-Response: ```JSON
+Response: 
+```json
 {"Fullscreen": false, "HasTrackList": true, "CanSetFullscreen": false, "SupportedUriSchemes": ["file", "http", "cdda", "smb", "sftp"], "CanQuit": true, "DesktopEntry": "clementine", "CanRaise": true, "SupportedMimeTypes": ["application/ogg", "application/x-ogg", "application/x-ogm-audio", "audio/aac", "audio/mp4", "audio/mpeg", "audio/mpegurl", "audio/ogg", "audio/vnd.rn-realaudio", "audio/vorbis", "audio/x-flac", "audio/x-mp3", "audio/x-mpeg", "audio/x-mpegurl", "audio/x-ms-wma", "audio/x-musepack", "audio/x-oggflac", "audio/x-pn-realaudio", "audio/x-scpls", "audio/x-speex", "audio/x-vorbis", "audio/x-vorbis+ogg", "audio/x-wav", "video/x-ms-asf", "x-content/audio-player"], "Identity": "Clementine"}
 ```
 
-Request: ` curl -i -H "Accept: application/json" -X PUT -d "{\"Fullscreen\": true}" "http://127.0.0.1:8000/webmpris/players/:1.9904/Root"`
+Request: 
+```bash
+curl -i -H "Accept: application/json" -X PUT -d "{\"Fullscreen\": true}" "http://127.0.0.1:8000/webmpris/players/:1.9904/Root"
+```
 
 Response: `{"errmsg": []}`
 
@@ -159,33 +163,47 @@ Response: `{"status": "success", "result": null}`
 ### org.mpris.MediaPlayer2.Player interface ###
 
 **Properties**
+
 Request: ` curl -i -H "Accept: application/json" -X GET "http://127.0.0.1:8000/webmpris/players/:1.9904/Player"`
 
-Response: ```JSON
+Response: 
+```JSON
 {"CanGoNext": true, "Shuffle": false, "CanControl": true, "LoopStatus": "Track", "CanPause": true, "PlaybackStatus": "Paused", "Volume": 0.5, "Rate": 1.0, "CanPlay": true, "CanSeek": false, "Position": 758503033, "CanGoPrevious": true, "MaximumRate": dbus.Double(1.0, variant_level=1), "Metadata": {"mpris:trackid": "/org/mpris/MediaPlayer2/Track/1", "xesam:artist": ["Billy Eckstine"], "mpris:artUrl": "file:///tmp/clementine-art-E19378.jpg", "xesam:url": "jazzradio://vocallegends", "xesam:title": "Ill Wind"}}
 ```
 
-Request: `curl -i -H "Accept: application/json" -X PUT -d "{\"Volume\": 0.7}" "http://127.0.0.1:8000/webmpris/players/:1.9904/Player"`
+Request: 
+```bash
+curl -i -H "Accept: application/json" -X PUT -d "{\"Volume\": 0.7}" "http://127.0.0.1:8000/webmpris/players/:1.9904/Player"
+```
 
 Response: `{"errmsg": []}`
 
 **Methods**
 
-Use `PlayPause` method:
+**Use `PlayPause` method**
 
-Request: `curl -i -H "Accept: application/json" -X POST "http://127.0.0.1:8000/webmpris/players/:1.9904/Player/PlayPause"`
+Request: 
+```bash
+curl -i -H "Accept: application/json" -X POST "http://127.0.0.1:8000/webmpris/players/:1.9904/Player/PlayPause"
+```
 
 Response: `{"status": "success", "result": null}`
 
-Use method with argument:
+**Use method with argument**
 
-Request with arguments: `curl -i -H "Accept: application/json" -X POST -d "{\"args\": [-50000]}" "http://127.0.0.1:8000/webmpris/players/:1.9904/Player/Seek"`
+Request with arguments: 
+```bash
+curl -i -H "Accept: application/json" -X POST -d "{\"args\": [-50000]}" "http://127.0.0.1:8000/webmpris/players/:1.9904/Player/Seek"
+```
 
 Respnonse: `{"status": "success", "result": null}`
 
 
-Use method with two arguments:
+**Use method with two arguments**
 
-Request: `curl -i -H "Accept: application/json" -X POST -d "{\"args\": [\"/org/mpris/MediaPlayer2/Track/2\", 1250000]}" "http://127.0.0.1:8000/webmpris/players/:1.9904/Player/SetPosition"`
+Request: 
+```bash
+curl -i -H "Accept: application/json" -X POST -d "{\"args\": [\"/org/mpris/MediaPlayer2/Track/2\", 1250000]}" "http://127.0.0.1:8000/webmpris/players/:1.9904/Player/SetPosition"
+```
 
 Respnonse: `{"status": "success", "result": null}`
