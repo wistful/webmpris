@@ -60,12 +60,13 @@ class BaseTestCase(object):
             setattr(getattr(webmpris.views, self.CLS_VIEW),
                     'CLS_MPRIS',
                     mock.Mock(return_value=mymock))
-            args = {'args': ['value1', 2, True]}
+            args = ['value1', 2, True]
+            data = {'args': args}
             for method in methods:
                 url = '/webmpris/players/:TestPlayer/%s/%s' % (
                     self.PATH, method)
                 response = self.client.post(url,
-                                            data=json.dumps(args),
+                                            data=json.dumps(data),
                                             content_type="application/json")
                 self.assertEqual(
                     json.loads(response.content).get('status'), 'success')
