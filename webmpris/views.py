@@ -34,7 +34,7 @@ class Base(View):
 
     def instance_by_id(self, player_id):
         """return instance of CLS_MPRIS by player_id"""
-        return self.CLS_MPRIS(player_id)
+        return self.CLS_MPRIS(player_id, private=True)
 
     def properties(self, player_id):
         """return all properties as a dictionary"""
@@ -43,7 +43,7 @@ class Base(View):
         for name in self.props:
             try:
                 d[name] = getattr(obj, name)
-            except Exception:
+            except pympris.PyMPRISException:
                 pass
         return d
 
@@ -71,8 +71,8 @@ class Base(View):
         try:
             attrs['result'] = self._method(player_id, method_name, *args)
             attrs['status'] = 'success'
-        except Exception:
-            pass
+        except pympris.PyMPRISException as err:
+            attrs['error'] = str(err)
         return response_json(attrs, status=200)
 
     # PUT request - set properties
@@ -89,9 +89,10 @@ class Base(View):
                     setattr(obj, p_name, p[p_name])
                 else:
                     errors.append({p_name: "Unknown property"})
-            except Exception:
+            except pympris.PyMPRISException as err:
+                message = "Exception during changing property: " + str(err)
                 errors.append(
-                    {p_name: "Exception during changing property"})
+                    {p_name: message})
         return response_json({'errmsg': errors}, status=200)
 
 
@@ -117,7 +118,7 @@ class Player(Base):
     methods = ('Next', 'Previous', 'Pause', 'PlayPause', 'Stop', 'Play',
                'Seek', 'SetPosition', 'OpenUri')
     props = ('PlaybackStatus', 'LoopStatus', 'Rate', 'Shuffle', 'Metadata',
-             'Volume', 'Position', 'Minimumrate', 'MaximumRate',
+             'Volume', 'Position', 'MinimumRate', 'MaximumRate',
              'CanGoNext', 'CanGoPrevious', 'CanPlay', 'CanPause',
              'CanSeek', 'CanControl')
 
