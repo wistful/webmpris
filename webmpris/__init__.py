@@ -1,4 +1,4 @@
-__version__ = '1.0'
+__version__ = '1.1'
 __description__ = 'REST API to control media players via MPRIS2 interfaces'
 requires = [
     'pympris'
